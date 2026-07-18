@@ -153,8 +153,8 @@ section{ padding-block:var(--space-6); }
 .btn-ghost:hover{ border-color:var(--accent); }
 
 /* ---------- nav ---------- */
+.sticky-header{ position:sticky; top:0; z-index:40; }
 .site-nav{
-  position:sticky; top:0; z-index:40;
   background:color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
@@ -417,6 +417,7 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
 </head>
 <body>
 
+<div class="sticky-header">
 <div class="announce-bar" id="announce-bar">
   <div class="announce-inner">
     <p><strong>Free live webinar:</strong> Learn how to become an AI Engineer, before you commit to the full cohort. <a href="https://go.learnwithsarvesh.com/webinar-org/" target="_blank" rel="noopener">Reserve your free seat →</a></p>
@@ -444,6 +445,7 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
     </div>
   </div>
 </header>
+</div>
 
 <section class="hero" id="top">
   <div class="hero-graph" aria-hidden="true">
