@@ -234,23 +234,23 @@ h1.hero-title em{ font-style:italic; color:var(--accent); }
 .stat span{ font-size:var(--fs-2); color:var(--ink-dim); }
 
 /* ---------- announcement bar ---------- */
-.announce-bar{ background:var(--amber-bg); color:#241a05; }
+.announce-bar{ background:var(--bg-inset); border-bottom:1px solid var(--line); color:var(--ink); }
 .announce-inner{
   position:relative; display:flex; align-items:center; justify-content:center; gap:1rem;
   flex-wrap:wrap; padding:0.75rem 2.5rem; text-align:center; font-size:var(--fs-2);
 }
-.announce-inner strong{ font-weight:700; }
+.announce-inner strong{ font-weight:700; color:var(--accent); }
 .announce-inner a{
-  color:#241a05; font-family:var(--font-mono); font-weight:600; white-space:nowrap;
+  color:var(--amber-bg); font-family:var(--font-mono); font-weight:700; white-space:nowrap;
   text-decoration:underline; text-underline-offset:3px;
 }
 .announce-inner a:hover{ text-decoration-color:transparent; }
 .announce-close{
   position:absolute; right:0.75rem; top:50%; transform:translateY(-50%);
-  background:none; border:none; color:#241a05; opacity:0.65; cursor:pointer;
+  background:none; border:none; color:var(--ink-dim); opacity:0.8; cursor:pointer;
   font-size:1.15rem; line-height:1; padding:0.35rem; font-family:var(--font-mono);
 }
-.announce-close:hover{ opacity:1; }
+.announce-close:hover{ opacity:1; color:var(--ink); }
 @media (max-width:640px){ .announce-inner{ font-size:var(--fs-1); padding:0.7rem 2.25rem; } }
 
 /* ---------- pull quote ---------- */
