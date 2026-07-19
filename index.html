@@ -259,7 +259,15 @@ h1.hero-title em{ font-style:italic; color:var(--accent); }
 .price-line .price-dot{ color:var(--ink-dim); margin-inline:0.3em; font-size:var(--fs-4); }
 .price-regular{ margin-top:0.5rem; font-size:var(--fs-2); color:var(--ink-dim); }
 .price-regular s{ opacity:0.8; }
-.price-countdown{ margin-top:1.6rem; }
+.price-countdown{
+  margin-top:1.6rem; display:inline-flex; flex-direction:column; align-items:center; gap:0.6rem;
+  border:1px solid color-mix(in srgb, var(--amber-bg) 45%, var(--line));
+  background:color-mix(in srgb, var(--amber-bg) 12%, var(--bg-raised));
+  border-radius:var(--radius-md); padding:1rem 1.6rem;
+}
+.price-countdown .countdown-label{ color:var(--amber-bg); }
+.price-countdown .countdown-timer{ justify-content:center; }
+.price-countdown .cd-sep{ color:color-mix(in srgb, var(--amber-bg) 40%, var(--line)); }
 .price-checklist{ list-style:none; margin:1.75rem 0 0; padding:0; display:grid; gap:0.85rem; text-align:left; }
 .price-checklist li{ padding-left:1.6rem; position:relative; }
 .price-checklist li::before{ content:"✓"; position:absolute; left:0; color:var(--accent); font-family:var(--font-mono); font-weight:600; }
@@ -380,13 +388,48 @@ h1.hero-title em{ font-style:italic; color:var(--accent); }
 .stack-chip .dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); flex:none; }
 
 /* ---------- testimonials ---------- */
-.testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
-@media (max-width:900px){ .testi-grid{ grid-template-columns:1fr 1fr; } }
-@media (max-width:600px){ .testi-grid{ grid-template-columns:1fr; } }
-.testi{ border:1px solid var(--line); border-radius:var(--radius-md); padding:1.5rem; background:var(--bg-raised); display:flex; flex-direction:column; gap:1rem; }
-.testi p{ font-size:var(--fs-2); flex:1; }
-.testi footer{ font-size:var(--fs-1); color:var(--ink-dim); font-family:var(--font-mono); }
-.testi footer b{ display:block; color:var(--ink); font-family:var(--font-body); font-size:var(--fs-2); }
+.testi-shell{ display:flex; flex-direction:column; gap:1.25rem; }
+.testi-controls{ display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+.testi-note{ margin:0; font-family:var(--font-mono); font-size:var(--fs-1); color:var(--ink-dim); }
+.testi-toggle{
+  flex:none; font-family:var(--font-mono); font-size:var(--fs-1); font-weight:600; letter-spacing:0.02em;
+  padding:0.55em 1.3em; border-radius:var(--radius-sm); border:1px solid var(--line);
+  background:var(--bg-raised); color:var(--ink); cursor:pointer;
+  transition:border-color 0.15s ease, color 0.15s ease;
+}
+.testi-toggle:hover{ border-color:var(--accent); color:var(--accent); }
+.testi-toggle:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.testi-toggle[aria-pressed="true"]{ border-color:var(--accent); color:var(--accent); }
+.testi-carousel-wrap{ position:relative; display:flex; align-items:center; gap:1rem; }
+.testi-carousel{
+  flex:1; min-width:0; overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right, transparent, #000 1.5%, #000 98.5%, transparent);
+  mask-image:linear-gradient(to right, transparent, #000 1.5%, #000 98.5%, transparent);
+}
+.testi-track{ display:flex; gap:1.25rem; overflow:hidden; }
+.testi-card{
+  flex:0 0 auto; width:min(340px, 82vw); border:1px solid var(--line); border-radius:var(--radius-md);
+  padding:1.5rem; background:var(--bg-raised); display:flex; flex-direction:column; gap:1.1rem;
+}
+.testi-quote{ margin:0; font-size:var(--fs-2); line-height:1.5; flex:1; }
+.testi-footer{ display:flex; align-items:center; gap:0.85rem; }
+.testi-avatar{ flex:none; width:2.75rem; height:2.75rem; border-radius:50%; overflow:hidden; background:var(--bg-inset); }
+.testi-avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+.testi-avatar.is-fallback{
+  display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:var(--fs-1);
+  font-weight:700; color:var(--accent); background:color-mix(in srgb, var(--accent) 16%, var(--bg-inset));
+}
+.testi-meta{ display:flex; flex-direction:column; gap:0.15rem; font-family:var(--font-mono); font-size:var(--fs-1); color:var(--ink-dim); }
+.testi-meta strong{ font-family:var(--font-body); font-size:var(--fs-2); font-weight:600; color:var(--ink); }
+@media (max-width:600px){ .testi-card{ width:min(300px, 86vw); padding:1.25rem; } }
+
+.live-track{ display:flex; gap:1.25rem; overflow:hidden; align-items:flex-start; }
+.live-card{
+  flex:0 0 auto; width:300px; height:380px; border:1px solid var(--line); border-radius:var(--radius-md);
+  overflow:hidden; background:var(--bg-inset);
+}
+.live-card img{ width:100%; height:100%; display:block; object-fit:contain; }
+@media (max-width:600px){ .live-card{ width:230px; height:300px; } }
 
 /* ---------- video testimonials ---------- */
 .video-carousel{ position:relative; display:flex; align-items:center; gap:1rem; }
@@ -528,10 +571,8 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
       <a class="btn btn-ghost" href="#curriculum">See the syllabus</a>
     </div>
     <div class="countdown" id="countdown">
-      <span class="countdown-label">Next cohort starts<br>Aug 2, 4:30 PM IST</span>
+      <span class="countdown-label">Application closes in</span>
       <div class="countdown-timer">
-        <div class="cd-unit"><span class="cd-num" id="cd-days">00</span><span class="cd-unit-label">Days</span></div>
-        <span class="cd-sep">:</span>
         <div class="cd-unit"><span class="cd-num" id="cd-hours">00</span><span class="cd-unit-label">Hrs</span></div>
         <span class="cd-sep">:</span>
         <div class="cd-unit"><span class="cd-num" id="cd-mins">00</span><span class="cd-unit-label">Min</span></div>
@@ -899,20 +940,141 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
       <p class="eyebrow">Proof</p>
       <h2>What learners say</h2>
     </div>
-    <div class="testi-grid">
-      <div class="testi"><p>"Before this cohort, I thought AI was just prompting models. Now I design complete AI systems where memory, tools, and retrieval work together to build real-world applications."</p><footer><b>Bala Satish</b>Staff Engineer · via LinkedIn</footer></div>
-      <div class="testi"><p>"Earlier AI felt like magic. Now I understand how LLM systems work and I can build RAG pipelines and agent workflows with confidence."</p><footer><b>Ane Kiran Teja</b>Software Engineer · via LinkedIn</footer></div>
-      <div class="testi"><p>"This cohort gave me the confidence to build AI systems independently. Building AI agent tools and multi-client server workflows was the most exciting part."</p><footer><b>Soma Sekhar</b>Software Engineer · via LinkedIn</footer></div>
-      <div class="testi"><p>"The course provided practical insights into how AI can be applied in real-world scenarios. The AI Agents module was my favourite."</p><footer><b>Srinivas Manian</b>Cloud Architect · via LinkedIn</footer></div>
-      <div class="testi"><p>"This cohort shifted my focus from just models to the importance of retrieval and context. Multi-agent orchestration showed how AI systems collaborate to solve complex tasks."</p><footer><b>Bala Panathula</b>SAP Lead · via LinkedIn</footer></div>
-      <div class="testi"><p>"This cohort helped me clearly understand how modern AI systems work. The hands-on projects made it easier to learn how LLMs, RAG, and AI agents can be applied to real-world problems."</p><footer><b>Parvath Sejala</b>Senior Software Engineer, Java Full Stack · via LinkedIn</footer></div>
-      <div class="testi"><p>"The course provided a clear and practical understanding of building AI systems. Learning how to connect prompts, tools, and retrieval pipelines was extremely valuable."</p><footer><b>Kiran Kanne</b>AI Engineer &amp; Generalist · via LinkedIn</footer></div>
-      <div class="testi"><p>"This cohort gave me strong exposure to agentic AI concepts and modern LLM frameworks. The structured modules and projects helped me build confidence in developing AI applications."</p><footer><b>Sasikumar V</b>Software Senior Engineer · via LinkedIn</footer></div>
-      <div class="testi"><p>"This program helped me build real-world AI applications like resume analyzers, chatbots, and document summarizers using LangChain and RAG pipelines."</p><footer><b>Aparna Paul</b>Technical Lead, Data &amp; Analytics · via LinkedIn</footer></div>
-      <div class="testi"><p>"This program provided both strong theoretical understanding and hands-on experience through real projects. Learning RAG systems and agent orchestration significantly improved my confidence."</p><footer><b>Balasubramanyam Moturu</b>Sr. Tech Project Manager · via LinkedIn</footer></div>
-      <div class="testi"><p>"This cohort helped me transition from traditional programming into AI development. I now understand how to design intelligent AI agents that can reason, use tools, and solve complex problems."</p><footer><b>Faozia Mohiuddin</b>via LinkedIn</footer></div>
-      <div class="testi"><p>"I learned how modern AI systems work using LLMs, RAG, LangChain, MCP, and LangGraph. The LangGraph module helped me understand how AI workflows plan, execute, and validate tasks."</p><footer><b>Usha Kommari</b>via LinkedIn</footer></div>
-      <div class="testi"><p>"This program provided both a deep understanding of AI systems and hands-on experience through industrial-level projects. Learning about LangChain and building voice agents significantly improved my confidence in developing real-world AI solutions and helped me in my current work."</p><footer><b>Suresh Itha</b>via LinkedIn</footer></div>
+    <div class="testi-shell">
+      <div class="testi-controls">
+        <p class="testi-note">Auto-scrolls slowly. Hover, focus, or pause to read each card.</p>
+        <button class="testi-toggle" id="testi-toggle" type="button" aria-pressed="false">Pause</button>
+      </div>
+      <div class="testi-carousel-wrap">
+        <button class="vc-arrow testi-prev" type="button" aria-label="Previous testimonials">‹</button>
+        <div class="testi-carousel" aria-label="Learner testimonials">
+          <div class="testi-track" id="testi-track">
+            <article class="testi-card">
+              <p class="testi-quote">"Before this cohort, I thought AI was just prompting models. Now I design complete AI systems where memory, tools, and retrieval work together to build real-world applications."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/balasateesh - Bala Satish.jpg" alt="Bala Satish" loading="lazy"></span>
+                <span class="testi-meta"><strong>Bala Satish</strong><span>Staff Engineer</span></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"Earlier AI felt like magic. Now I understand how LLM systems work and I can build RAG pipelines and agent workflows with confidence."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/WhatsApp Image 2026-02-27 at 16.05.03 - kiran teja.jpeg" alt="Ane Kiran Teja" loading="lazy"></span>
+                <span class="testi-meta"><strong>Ane Kiran Teja</strong><span>Software Engineer</span></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"This cohort gave me the confidence to build AI systems independently. Building AI agent tools and multi-client server workflows was the most exciting part."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/Soma_photo - Soma Sekhar Pothuru.jpg" alt="Soma Sekhar" loading="lazy"></span>
+                <span class="testi-meta"><strong>Soma Sekhar</strong><span>Software Engineer</span></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"The course provided practical insights into how AI can be applied in real-world scenarios. The AI Agents module was my favourite."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/Photo - Srinivas Manian Lakshmanan.jpg" alt="Srinivas Manian" loading="lazy"></span>
+                <span class="testi-meta"><strong>Srinivas Manian</strong><span>Cloud Architect</span></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"This cohort shifted my focus from just models to the importance of retrieval and context. Multi-agent orchestration showed how AI systems collaborate to solve complex tasks."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/Bala_photo - Balakrishna Panathula.PNG" alt="Bala Panathula" loading="lazy"></span>
+                <span class="testi-meta"><strong>Bala Panathula</strong><span>SAP Lead</span></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"This cohort helped me clearly understand how modern AI systems work. The hands-on projects made it easier to learn how LLMs, RAG, and AI agents can be applied to real-world problems."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/WhatsApp Image 2026-03-03 at 6.25.59 PM - Parvath S.jpeg" alt="Parvath Sejala" loading="lazy"></span>
+                <span class="testi-meta"><strong>Parvath Sejala</strong><span>Senior Software Engineer, Java Full Stack</span></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"The course provided a clear and practical understanding of building AI systems. Learning how to connect prompts, tools, and retrieval pipelines was extremely valuable."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/KK Prof Photo - kumar kumar.jpg" alt="Kiran Kanne" loading="lazy"></span>
+                <span class="testi-meta"><strong>Kiran Kanne</strong><span>AI Engineer &amp; Generalist</span></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"This cohort gave me strong exposure to agentic AI concepts and modern LLM frameworks. The structured modules and projects helped me build confidence in developing AI applications."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/SasikumarV - SASIKUMAR V.jpg" alt="Sasikumar V" loading="lazy"></span>
+                <span class="testi-meta"><strong>Sasikumar V</strong><span>Software Senior Engineer</span></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"This program helped me build real-world AI applications like resume analyzers, chatbots, and document summarizers using LangChain and RAG pipelines."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/aparna-pic - Rani.jpg" alt="Aparna Paul" loading="lazy"></span>
+                <span class="testi-meta"><strong>Aparna Paul</strong><span>Technical Lead, Data &amp; Analytics</span></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"This program provided both strong theoretical understanding and hands-on experience through real projects. Learning RAG systems and agent orchestration significantly improved my confidence."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/Bala Latest - Balasubramanyam Moturu.jpg" alt="Balasubramanyam Moturu" loading="lazy"></span>
+                <span class="testi-meta"><strong>Balasubramanyam Moturu</strong><span>Sr. Tech Project Manager</span></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"This cohort helped me transition from traditional programming into AI development. I now understand how to design intelligent AI agents that can reason, use tools, and solve complex problems."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar is-fallback">FM</span>
+                <span class="testi-meta"><strong>Faozia Mohiuddin</strong></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"I learned how modern AI systems work using LLMs, RAG, LangChain, MCP, and LangGraph. The LangGraph module helped me understand how AI workflows plan, execute, and validate tasks."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar is-fallback">UK</span>
+                <span class="testi-meta"><strong>Usha Kommari</strong></span>
+              </footer>
+            </article>
+            <article class="testi-card">
+              <p class="testi-quote">"This program provided both a deep understanding of AI systems and hands-on experience through industrial-level projects. Learning about LangChain and building voice agents significantly improved my confidence in developing real-world AI solutions and helped me in my current work."</p>
+              <footer class="testi-footer">
+                <span class="testi-avatar"><img src="Upload a Passport Size Photo   (File responses)/bf9eeaa1-3fc3-4dea-a990-3eba09536e6a - SURESH AITA.jpeg" alt="Suresh Itha" loading="lazy"></span>
+                <span class="testi-meta"><strong>Suresh Itha</strong></span>
+              </footer>
+            </article>
+          </div>
+        </div>
+        <button class="vc-arrow testi-next" type="button" aria-label="Next testimonials">›</button>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:var(--space-5);">
+      <p class="eyebrow">Straight from the chat</p>
+      <h2 style="font-size:var(--fs-5);">Feedback from live sessions</h2>
+      <p class="lede">Real reactions captured during cohort sessions — names blurred for privacy.</p>
+    </div>
+    <div class="testi-shell live-feedback-shell">
+      <div class="testi-controls">
+        <p class="testi-note">Auto-scrolls slowly. Hover, focus, or pause to read each one.</p>
+        <button class="testi-toggle" id="live-toggle" type="button" aria-pressed="false">Pause</button>
+      </div>
+      <div class="testi-carousel-wrap">
+        <button class="vc-arrow live-prev" type="button" aria-label="Previous feedback">‹</button>
+        <div class="testi-carousel" aria-label="Live session feedback screenshots">
+          <div class="live-track" id="live-track">
+            <div class="live-card"><img src="Testimonials/redacted/live1.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+            <div class="live-card"><img src="Testimonials/redacted/live2.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+            <div class="live-card"><img src="Testimonials/redacted/live3.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+            <div class="live-card"><img src="Testimonials/redacted/live4.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+            <div class="live-card"><img src="Testimonials/redacted/live5.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+            <div class="live-card"><img src="Testimonials/redacted/live6.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+            <div class="live-card"><img src="Testimonials/redacted/live7.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+            <div class="live-card"><img src="Testimonials/redacted/live8.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+            <div class="live-card"><img src="Testimonials/redacted/live9.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+            <div class="live-card"><img src="Testimonials/redacted/live10.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+            <div class="live-card"><img src="Testimonials/redacted/live11.png" alt="Live session chat feedback, names blurred" loading="lazy"></div>
+          </div>
+        </div>
+        <button class="vc-arrow live-next" type="button" aria-label="Next feedback">›</button>
+      </div>
     </div>
 
     <div class="section-head" style="margin-top:var(--space-5);">
@@ -997,8 +1159,6 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
       <div class="price-countdown">
         <p class="countdown-label">› Early-bird window closes</p>
         <div class="countdown-timer">
-          <div class="cd-unit"><span class="cd-num" id="pc-days">00</span><span class="cd-unit-label">Days</span></div>
-          <span class="cd-sep">:</span>
           <div class="cd-unit"><span class="cd-num" id="pc-hours">00</span><span class="cd-unit-label">Hrs</span></div>
           <span class="cd-sep">:</span>
           <div class="cd-unit"><span class="cd-num" id="pc-mins">00</span><span class="cd-unit-label">Min</span></div>
@@ -1127,6 +1287,272 @@ document.getElementById('year').textContent = new Date().getFullYear();
 })();
 
 (function () {
+  var shell = document.querySelector('.testi-shell');
+  var track = document.getElementById('testi-track');
+  var toggle = document.getElementById('testi-toggle');
+  var prev = document.querySelector('.testi-prev');
+  var next = document.querySelector('.testi-next');
+  if (!shell || !track || !toggle) return;
+
+  Array.from(track.children).forEach(function (card) {
+    track.appendChild(card.cloneNode(true));
+  });
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var userPaused = reduceMotion;
+  var hoverPaused = false;
+  var focusPaused = false;
+  var animationId = null;
+  var lastTs = 0;
+  var loopWidth = 0;
+  var speed = 18;
+
+  function isPaused() {
+    return userPaused || hoverPaused || focusPaused;
+  }
+
+  function measureLoopWidth() {
+    loopWidth = track.scrollWidth / 2;
+    if (track.scrollLeft >= loopWidth) track.scrollLeft -= loopWidth;
+  }
+
+  function syncToggle() {
+    var paused = isPaused();
+    toggle.setAttribute('aria-pressed', String(paused));
+    toggle.textContent = paused ? 'Resume' : 'Pause';
+  }
+
+  function stop() {
+    if (animationId === null) return;
+    window.cancelAnimationFrame(animationId);
+    animationId = null;
+    lastTs = 0;
+  }
+
+  function start() {
+    if (reduceMotion || animationId !== null || isPaused()) return;
+    animationId = window.requestAnimationFrame(step);
+  }
+
+  function step(ts) {
+    if (!lastTs) lastTs = ts;
+    var elapsed = (ts - lastTs) / 1000;
+    lastTs = ts;
+
+    if (!isPaused() && loopWidth > 0) {
+      track.scrollLeft += speed * elapsed;
+      if (track.scrollLeft >= loopWidth) track.scrollLeft -= loopWidth;
+    }
+
+    if (!document.hidden) animationId = window.requestAnimationFrame(step);
+    else stop();
+  }
+
+  function cardStep() {
+    var card = track.querySelector('.testi-card');
+    if (!card) return track.clientWidth;
+    var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '20');
+    return card.getBoundingClientRect().width + gap;
+  }
+
+  function nudge(delta) {
+    if (loopWidth <= 0) return;
+    var pos = track.scrollLeft + delta;
+    if (pos < 0) pos += loopWidth;
+    if (pos >= loopWidth) pos -= loopWidth;
+    track.scrollLeft = pos;
+  }
+
+  toggle.addEventListener('click', function () {
+    userPaused = !userPaused;
+    syncToggle();
+    if (isPaused()) stop();
+    else start();
+  });
+
+  if (prev) prev.addEventListener('click', function () { nudge(-cardStep()); });
+  if (next) next.addEventListener('click', function () { nudge(cardStep()); });
+
+  shell.addEventListener('mouseenter', function () {
+    hoverPaused = true;
+    syncToggle();
+    stop();
+  });
+  shell.addEventListener('mouseleave', function () {
+    hoverPaused = false;
+    syncToggle();
+    start();
+  });
+  shell.addEventListener('focusin', function () {
+    focusPaused = true;
+    syncToggle();
+    stop();
+  });
+  shell.addEventListener('focusout', function () {
+    window.setTimeout(function () {
+      if (!shell.contains(document.activeElement)) {
+        focusPaused = false;
+        syncToggle();
+        start();
+      }
+    }, 0);
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      stop();
+      return;
+    }
+    start();
+  });
+
+  window.addEventListener('resize', measureLoopWidth);
+  window.addEventListener('load', measureLoopWidth);
+
+  track.querySelectorAll('.testi-avatar img').forEach(function (img) {
+    img.addEventListener('error', function () {
+      var avatar = img.parentElement;
+      if (!avatar) return;
+      img.remove();
+      avatar.classList.add('is-fallback');
+      avatar.textContent = (img.alt || '').split(/\s+/).map(function (part) { return part.charAt(0); }).join('').slice(0, 2).toUpperCase() || 'LW';
+    }, { once: true });
+  });
+
+  measureLoopWidth();
+  syncToggle();
+  start();
+})();
+
+(function () {
+  var shell = document.querySelector('.live-feedback-shell');
+  var track = document.getElementById('live-track');
+  var toggle = document.getElementById('live-toggle');
+  var prev = document.querySelector('.live-prev');
+  var next = document.querySelector('.live-next');
+  if (!shell || !track || !toggle) return;
+
+  Array.from(track.children).forEach(function (card) {
+    track.appendChild(card.cloneNode(true));
+  });
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var userPaused = reduceMotion;
+  var hoverPaused = false;
+  var focusPaused = false;
+  var animationId = null;
+  var lastTs = 0;
+  var loopWidth = 0;
+  var speed = 18;
+
+  function isPaused() {
+    return userPaused || hoverPaused || focusPaused;
+  }
+
+  function measureLoopWidth() {
+    loopWidth = track.scrollWidth / 2;
+    if (track.scrollLeft >= loopWidth) track.scrollLeft -= loopWidth;
+  }
+
+  function syncToggle() {
+    var paused = isPaused();
+    toggle.setAttribute('aria-pressed', String(paused));
+    toggle.textContent = paused ? 'Resume' : 'Pause';
+  }
+
+  function stop() {
+    if (animationId === null) return;
+    window.cancelAnimationFrame(animationId);
+    animationId = null;
+    lastTs = 0;
+  }
+
+  function start() {
+    if (reduceMotion || animationId !== null || isPaused()) return;
+    animationId = window.requestAnimationFrame(step);
+  }
+
+  function step(ts) {
+    if (!lastTs) lastTs = ts;
+    var elapsed = (ts - lastTs) / 1000;
+    lastTs = ts;
+
+    if (!isPaused() && loopWidth > 0) {
+      track.scrollLeft += speed * elapsed;
+      if (track.scrollLeft >= loopWidth) track.scrollLeft -= loopWidth;
+    }
+
+    if (!document.hidden) animationId = window.requestAnimationFrame(step);
+    else stop();
+  }
+
+  function cardStep() {
+    var card = track.querySelector('.live-card');
+    if (!card) return track.clientWidth;
+    var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '20');
+    return card.getBoundingClientRect().width + gap;
+  }
+
+  function nudge(delta) {
+    if (loopWidth <= 0) return;
+    var pos = track.scrollLeft + delta;
+    if (pos < 0) pos += loopWidth;
+    if (pos >= loopWidth) pos -= loopWidth;
+    track.scrollLeft = pos;
+  }
+
+  toggle.addEventListener('click', function () {
+    userPaused = !userPaused;
+    syncToggle();
+    if (isPaused()) stop();
+    else start();
+  });
+
+  if (prev) prev.addEventListener('click', function () { nudge(-cardStep()); });
+  if (next) next.addEventListener('click', function () { nudge(cardStep()); });
+
+  shell.addEventListener('mouseenter', function () {
+    hoverPaused = true;
+    syncToggle();
+    stop();
+  });
+  shell.addEventListener('mouseleave', function () {
+    hoverPaused = false;
+    syncToggle();
+    start();
+  });
+  shell.addEventListener('focusin', function () {
+    focusPaused = true;
+    syncToggle();
+    stop();
+  });
+  shell.addEventListener('focusout', function () {
+    window.setTimeout(function () {
+      if (!shell.contains(document.activeElement)) {
+        focusPaused = false;
+        syncToggle();
+        start();
+      }
+    }, 0);
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      stop();
+      return;
+    }
+    start();
+  });
+
+  window.addEventListener('resize', measureLoopWidth);
+  window.addEventListener('load', measureLoopWidth);
+
+  measureLoopWidth();
+  syncToggle();
+  start();
+})();
+
+(function () {
   var track = document.getElementById('vc-track');
   if (!track) return;
   var prev = document.querySelector('.vc-prev');
@@ -1145,38 +1571,46 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 function pad(n) { return String(n).padStart(2, '0'); }
 
-function startCountdown(targetIso, idPrefix, onExpire) {
-  var target = new Date(targetIso).getTime();
-  var daysEl = document.getElementById(idPrefix + '-days');
+function startVisitorCountdown(hours, idPrefix, storageKey, onExpire) {
   var hoursEl = document.getElementById(idPrefix + '-hours');
   var minsEl = document.getElementById(idPrefix + '-mins');
   var secsEl = document.getElementById(idPrefix + '-secs');
-  if (!daysEl) return;
+  if (!hoursEl) return;
+
+  var deadline = null;
+  try {
+    var stored = localStorage.getItem(storageKey);
+    if (stored) deadline = parseInt(stored, 10);
+  } catch (e) {}
+
+  if (!deadline || isNaN(deadline)) {
+    deadline = Date.now() + hours * 3600000;
+    try { localStorage.setItem(storageKey, String(deadline)); } catch (e) {}
+  }
 
   var timer = setInterval(tick, 1000);
   tick();
 
   function tick() {
-    var diff = target - Date.now();
+    var diff = deadline - Date.now();
     if (diff <= 0) {
       clearInterval(timer);
       if (onExpire) onExpire();
       return;
     }
-    daysEl.textContent = pad(Math.floor(diff / 86400000));
-    hoursEl.textContent = pad(Math.floor((diff / 3600000) % 24));
+    hoursEl.textContent = pad(Math.floor(diff / 3600000));
     minsEl.textContent = pad(Math.floor((diff / 60000) % 60));
     secsEl.textContent = pad(Math.floor((diff / 1000) % 60));
   }
 }
 
-startCountdown("2026-08-02T16:30:00+05:30", "cd", function () {
+startVisitorCountdown(12, "cd", "lws_apply_deadline", function () {
   var countdownEl = document.getElementById('countdown');
-  if (countdownEl) countdownEl.innerHTML = '<span class="countdown-label">The cohort is live — enroll to join now.</span>';
+  if (countdownEl) countdownEl.innerHTML = '<span class="countdown-label">Applications have closed for this window — check back for the next cohort.</span>';
 });
 
-startCountdown("2026-08-02T16:30:00+05:30", "pc", function () {
-  var el = document.getElementById('pc-days');
+startVisitorCountdown(12, "pc", "lws_apply_deadline", function () {
+  var el = document.getElementById('pc-hours');
   var wrap = el && el.closest('.price-countdown');
   if (wrap) wrap.innerHTML = '<span class="countdown-label">The early-bird window has closed.</span>';
 });
