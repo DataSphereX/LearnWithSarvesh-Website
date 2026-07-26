@@ -1134,7 +1134,6 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
     </div>
     <dl>
       <dt>Program</dt><dd>12-Week AI Engineer Ready Program</dd>
-      <dt>Next cohort</dt><dd>Starts Sunday, August 2, 4:30 PM IST</dd>
       <dt>Duration</dt><dd>12 weeks</dd>
       <dt>Format</dt><dd>Structured recorded modules + weekly live mentorship + hands-on production projects</dd>
       <dt>Live mentorship</dt><dd>3 hours every week, plus doubt-clearing or a guest lecture every alternate Saturday</dd>
@@ -1555,18 +1554,29 @@ document.getElementById('year').textContent = new Date().getFullYear();
 (function () {
   var track = document.getElementById('vc-track');
   if (!track) return;
+  var slides = Array.prototype.slice.call(track.querySelectorAll('.vc-slide'));
   var prev = document.querySelector('.vc-prev');
   var next = document.querySelector('.vc-next');
+  if (!slides.length) return;
 
-  function slideStep() {
-    var slide = track.querySelector('.vc-slide');
-    if (!slide) return track.clientWidth;
-    var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '24');
-    return slide.getBoundingClientRect().width + gap;
+  function nearestIndex() {
+    var trackCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+    var closest = 0, closestDist = Infinity;
+    slides.forEach(function (slide, i) {
+      var r = slide.getBoundingClientRect();
+      var dist = Math.abs((r.left + r.width / 2) - trackCenter);
+      if (dist < closestDist) { closestDist = dist; closest = i; }
+    });
+    return closest;
   }
 
-  prev.addEventListener('click', function () { track.scrollBy({ left: -slideStep(), behavior: 'smooth' }); });
-  next.addEventListener('click', function () { track.scrollBy({ left: slideStep(), behavior: 'smooth' }); });
+  function goTo(i) {
+    var clamped = Math.max(0, Math.min(slides.length - 1, i));
+    slides[clamped].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+
+  prev.addEventListener('click', function () { goTo(nearestIndex() - 1); });
+  next.addEventListener('click', function () { goTo(nearestIndex() + 1); });
 })();
 
 function pad(n) { return String(n).padStart(2, '0'); }
