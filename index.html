@@ -479,6 +479,9 @@ h1.hero-title em{ font-style:italic; color:var(--accent); }
 .pay-row{ display:flex; gap:0.75rem; margin-top:1.1rem; }
 .pay-row .btn{ flex:1; justify-content:center; padding:0.85em 1em; }
 @media (max-width:420px){ .pay-row{ flex-direction:column; } }
+.price-or{ margin:1rem 0 0; font-family:var(--font-mono); font-size:var(--fs-1); color:var(--ink-dim); text-transform:uppercase; letter-spacing:0.05em; }
+.pay-row-sub{ display:flex; margin-top:0.6rem; }
+.pay-row-sub .btn{ flex:1; justify-content:center; padding:0.85em 1em; }
 .social-row{ display:flex; align-items:center; gap:0.75rem; margin-top:1.4rem; padding-top:1.2rem; border-top:1px solid var(--line); }
 .social-icon{
   display:flex; align-items:center; justify-content:center; width:2.5rem; height:2.5rem;
@@ -1180,6 +1183,12 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
         <a class="btn btn-ghost" href="https://pages.razorpay.com/ai-ready-global" target="_blank" rel="noopener">🌐 Pay · Global · $</a>
       </div>
       <p class="price-note">Secure checkout via Razorpay — pick whichever currency matches where you're paying from.</p>
+
+      <p class="price-or">— or pay in 4 monthly instalments —</p>
+      <div class="pay-row-sub">
+        <a class="btn btn-ghost" href="/subscribe" id="subscribe-btn" target="_blank" rel="noopener">🔁 Subscribe · ₹5,000 × 4 months</a>
+      </div>
+      <p class="price-note">Sets up automatic monthly billing via Razorpay — cancel anytime from your Razorpay subscription page.</p>
 
       <div class="enroll-row"><span class="row-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 14.3 0 18M12 3c-2.5 2.7-2.5 14.3 0 18"/></svg></span><a href="https://www.learnwithsarvesh.com" target="_blank" rel="noopener">learnwithsarvesh.com</a></div>
       <div class="enroll-row"><span class="row-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span><a href="mailto:admissions@learnwithsarvesh.com">admissions@learnwithsarvesh.com</a></div>
