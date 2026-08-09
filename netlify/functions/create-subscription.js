@@ -1,5 +1,5 @@
 const PLAN_ID = "plan_TNVSw1F3x4jBSa";
-const TOTAL_COUNT = 4; // 4 monthly instalments of ₹5,000
+const TOTAL_COUNT = 3; // 3 monthly cycles of ₹5,000, first one topped up to ₹10,000 via addon
 
 exports.handler = async function () {
   const keyId = process.env.RAZORPAY_KEY_ID;
@@ -18,6 +18,15 @@ exports.handler = async function () {
       plan_id: PLAN_ID,
       total_count: TOTAL_COUNT,
       customer_notify: 1,
+      addons: [
+        {
+          item: {
+            name: "First instalment top-up",
+            amount: 500000,
+            currency: "INR",
+          },
+        },
+      ],
     }),
   });
 
