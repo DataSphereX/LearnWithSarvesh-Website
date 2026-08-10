@@ -1,4 +1,4 @@
-const PLAN_ID = "plan_TNVSw1F3x4jBSa";
+const PLAN_ID = "plan_TNdDWIY6A1EtAI";
 const TOTAL_COUNT = 3; // 3 monthly cycles of ₹5,000, first one topped up to ₹10,000 via addon
 
 exports.handler = async function () {
