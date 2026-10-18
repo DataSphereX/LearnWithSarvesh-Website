@@ -1,8 +1,2 @@
 [build]
   publish = "."
-  functions = "netlify/functions"
-
-[[redirects]]
-  from = "/subscribe"
-  to = "/.netlify/functions/create-subscription"
-  status = 200
