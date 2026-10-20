@@ -408,6 +408,7 @@ h1.hero-title em{ font-style:italic; color:var(--accent); }
 .lead-points li{ padding-left:1.3rem; position:relative; }
 .lead-points li::before{ content:"✓"; position:absolute; left:0; color:var(--accent); }
 #lead-form{ display:grid; gap:0.9rem; }
+#lead-form[hidden], .lead-done[hidden], .lead-error[hidden]{ display:none; }
 #lead-form label{ display:grid; gap:0.35rem; font-size:var(--fs-1); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-dim); }
 #lead-form input, #lead-form select{ font:inherit; font-family:var(--font-body); font-size:var(--fs-3); text-transform:none; letter-spacing:0; color:var(--ink); background:var(--bg-inset); border:1px solid var(--line); border-radius:var(--radius-sm); padding:0.7em 0.8em; width:100%; box-sizing:border-box; }
 #lead-form input:focus, #lead-form select:focus{ outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent); }
@@ -1488,6 +1489,9 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
       <div class="lead-form-wrap">
         <form name="roadmap-lead" id="lead-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="roadmap-lead">
+          <input type="hidden" name="whatsapp_reply_link" id="wa-reply-link" value="">
+          <input type="hidden" name="whatsapp_number" id="wa-number" value="">
+          <input type="hidden" name="first_name" id="wa-first-name" value="">
           <p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <label>Your name<input type="text" name="name" required autocomplete="name"></label>
           <label>Email<input type="email" name="email" required autocomplete="email"></label>
@@ -1647,6 +1651,17 @@ document.addEventListener('click', function (e) {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     err.hidden = true;
+    // One-tap follow-up: a wa.me link with the lead's number and a ready message,
+    // which shows up in the Netlify notification email
+    var digits = (form.elements['whatsapp'].value || '').replace(/\D/g, '').replace(/^0+/, '');
+    if (digits.length === 10) digits = '91' + digits;
+    var first = (form.elements['name'].value || '').trim().split(/\s+/)[0] || 'there';
+    var msg = 'Hi ' + first + ', this is Sarvesh from Learn With Sarvesh 👋 Thanks for downloading the AI Engineer Ready roadmap! ' +
+              'Quick question: are you from a tech or non-tech background? I\'ll tell you exactly where to start.';
+    document.getElementById('wa-reply-link').value = digits ? 'https://wa.me/' + digits + '?text=' + encodeURIComponent(msg) : '';
+    // Clean fields for BotBiz: digits with country code (e.g. 919876543210) and first name
+    document.getElementById('wa-number').value = digits;
+    document.getElementById('wa-first-name').value = first === 'there' ? '' : first;
     var btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.textContent = 'Sending…';
