@@ -440,7 +440,8 @@ h1.hero-title em{ font-style:italic; color:var(--accent); }
 @media (max-width:900px){ .roles-grid{ grid-template-columns:1fr 1fr; } }
 @media (max-width:560px){ .roles-grid{ grid-template-columns:1fr; } }
 .role-card{ background:var(--bg-raised); border:1px solid var(--line); border-radius:var(--radius-md); padding:1.4rem; }
-.role-band{ display:block; font-family:var(--font-display); font-size:var(--fs-6); line-height:1.05; color:var(--accent); font-weight:600; }
+.role-band{ display:inline-block; font-family:var(--font-mono); font-size:var(--fs-1); text-transform:uppercase; letter-spacing:0.06em; color:var(--accent); border:1px solid var(--line); border-radius:999px; padding:0.2em 0.75em; }
+.role-card:not(.role-also) h4{ font-family:var(--font-display); font-size:var(--fs-5); line-height:1.15; margin-top:0.7rem; }
 .role-card h4{ margin-top:0.6rem; font-size:var(--fs-3); }
 .role-card p{ margin-top:0.4rem; color:var(--ink-dim); font-size:var(--fs-2); }
 .role-also{ background:var(--bg-inset); }
@@ -1191,14 +1192,13 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
       <p class="lede">"AI Engineer" has split into distinct roles — and companies pay a premium for people who can build the whole system.</p>
     </div>
     <div class="roles-grid">
-      <div class="role-card"><span class="role-band">₹8–12 LPA</span><h4>AI / GenAI Engineer</h4><p>Entry band with a real GenAI project portfolio. The base role every other one builds on.</p></div>
-      <div class="role-card"><span class="role-band">₹18–55 LPA</span><h4>Forward Deployed Engineer</h4><p>₹18–28 LPA in the first 2 years, ₹28–55 LPA at 3–6 years. Your domain experience is the entry ticket.</p></div>
-      <div class="role-card"><span class="role-band">₹8–30 LPA</span><h4>Agentic AI Engineer</h4><p>₹8–15 LPA entry, ₹15–30 LPA mid-level. The newest title, with the thinnest talent pool.</p></div>
-      <div class="role-card"><span class="role-band">+20–40%</span><h4>Full-Stack AI / AI Product Engineer</h4><p>Premium over an equivalent developer profile. The highest hiring volume of any AI role.</p></div>
-      <div class="role-card"><span class="role-band">₹14–24 LPA</span><h4>AI Solutions Architect</h4><p>Entry band for the role you grow into after 1–2 years building AI systems.</p></div>
+      <div class="role-card"><span class="role-band">The base role</span><h4>AI / GenAI Engineer</h4><p>Build and ship GenAI features backed by a real project portfolio. Every other AI role builds on this one.</p></div>
+      <div class="role-card"><span class="role-band">Domain experience counts</span><h4>Forward Deployed Engineer</h4><p>Work with clients to turn their real problems into working AI systems. Your domain experience is the entry ticket.</p></div>
+      <div class="role-card"><span class="role-band">Thinnest talent pool</span><h4>Agentic AI Engineer</h4><p>Build agents that plan, use tools and hand work to each other. The newest title, with the fewest people who can do it.</p></div>
+      <div class="role-card"><span class="role-band">Highest hiring volume</span><h4>Full-Stack AI / AI Product Engineer</h4><p>Build the whole product: AI backend, UI and deployment. Paid a premium over an equivalent developer profile.</p></div>
+      <div class="role-card"><span class="role-band">Your next step up</span><h4>AI Solutions Architect</h4><p>Design AI systems and make the build-vs-buy calls. The role you grow into after 1–2 years building AI systems.</p></div>
       <div class="role-card role-also"><span class="skill-tag">Also prepares you for</span><ul><li>Applied AI Engineer</li><li>AI Automation Engineer</li><li>LLM Engineer (Applied)</li><li>Backend Engineer (AI Systems)</li></ul></div>
     </div>
-    <p class="roles-source">India, 2026 salary bands. Sources: Taggd · EICTA (IIT Kanpur) · Recrew · OwnYourCareer · WorthvieW · NovelVista · Futurense · ERI SalaryExpert.</p>
     <div class="tool-callout">
       <div class="tc-text">
         <span class="tc-tag">Free tool · about 5 minutes</span>
