@@ -1,2 +1,10 @@
 [build]
   publish = "."
+
+# The free tools live on their own site (kit.learnwithsarvesh.com).
+# kit-7f3k/ is kept here as the source copy; send visitors to the live site instead.
+[[redirects]]
+  from = "/kit-7f3k/*"
+  to = "https://kit.learnwithsarvesh.com/:splat"
+  status = 301
+  force = true

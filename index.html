@@ -448,6 +448,11 @@ h1.hero-title em{ font-style:italic; color:var(--accent); }
 .role-also li{ padding-left:1.1rem; position:relative; font-weight:500; }
 .role-also li::before{ content:"✓"; position:absolute; left:0; color:var(--accent); }
 .roles-source{ margin-top:1rem; font-size:var(--fs-1); color:var(--ink-dim); font-style:italic; }
+.tool-callout{ margin-top:var(--space-3); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem 1.5rem; background:var(--bg-raised); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:var(--radius-md); padding:1.1rem 1.4rem; }
+.tool-callout .tc-text{ flex:1 1 420px; }
+.tool-callout .tc-tag{ font-family:var(--font-mono); font-size:var(--fs-1); color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; }
+.tool-callout h4{ margin:0.25em 0 0.2em; }
+.tool-callout p{ margin:0; color:var(--ink-dim); font-size:var(--fs-2); }
 .after-pay{ margin:1.5rem 0 0; padding:1rem 1.2rem; border:1px dashed var(--line); border-radius:var(--radius-md); text-align:left; }
 .after-pay p{ margin:0 0 0.6rem; font-family:var(--font-mono); font-size:var(--fs-1); text-transform:uppercase; letter-spacing:0.05em; color:var(--accent); }
 .after-pay ol{ margin:0; padding-left:1.2rem; display:grid; gap:0.35rem; color:var(--ink-dim); font-size:var(--fs-2); }
@@ -1167,6 +1172,14 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
       <div class="stack-chip"><span class="dot"></span>Ragas</div>
       <div class="stack-chip"><span class="dot"></span>Presidio</div>
     </div>
+    <div class="tool-callout">
+      <div class="tc-text">
+        <span class="tc-tag">Free tool</span>
+        <h4>What will your LLM app cost to run?</h4>
+        <p>Compare Claude, GPT and Gemini side by side and see the monthly bill in ₹, including the savings from prompt caching.</p>
+      </div>
+      <a class="btn btn-ghost" href="https://kit.learnwithsarvesh.com/calculator.html" target="_blank" rel="noopener">Open the LLM Cost Calculator →</a>
+    </div>
   </div>
 </section>
 
@@ -1186,6 +1199,14 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
       <div class="role-card role-also"><span class="skill-tag">Also prepares you for</span><ul><li>Applied AI Engineer</li><li>AI Automation Engineer</li><li>LLM Engineer (Applied)</li><li>Backend Engineer (AI Systems)</li></ul></div>
     </div>
     <p class="roles-source">India, 2026 salary bands. Sources: Taggd · EICTA (IIT Kanpur) · Recrew · OwnYourCareer · WorthvieW · NovelVista · Futurense · ERI SalaryExpert.</p>
+    <div class="tool-callout">
+      <div class="tc-text">
+        <span class="tc-tag">Free tool · about 5 minutes</span>
+        <h4>Not sure which of these roles fits you?</h4>
+        <p>Take the AI Engineer Skill Gap Audit. See how ready you are for each of the five roles, and the four skills to learn next.</p>
+      </div>
+      <a class="btn btn-ghost" href="https://kit.learnwithsarvesh.com/skill-gap-audit.html" target="_blank" rel="noopener">Take the Skill Gap Audit →</a>
+    </div>
     <div class="mid-cta"><a class="btn btn-amber" href="#enroll">Enroll now — ₹19,999</a><span>Join any week · 2-year access</span></div>
   </div>
 </section>
@@ -1598,6 +1619,8 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
         <li><a href="#reviews">Reviews</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#roadmap">Free 6-project roadmap</a></li>
+        <li><a href="https://kit.learnwithsarvesh.com/skill-gap-audit.html" target="_blank" rel="noopener">Free Skill Gap Audit</a></li>
+        <li><a href="https://kit.learnwithsarvesh.com/calculator.html" target="_blank" rel="noopener">Free LLM Cost Calculator</a></li>
         <li><a href="https://go.learnwithsarvesh.com/webinar-org/" target="_blank" rel="noopener">Free webinar</a></li>
       </ul>
     </div>
