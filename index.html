@@ -235,6 +235,9 @@ h1.hero-title em{ font-style:italic; color:var(--accent); }
   padding-block:0.85rem;
 }
 .hero-ctas{ margin-top:2.25rem; display:flex; gap:1rem; flex-wrap:wrap; }
+.hero-tools{ margin-top:1.1rem; display:flex; flex-wrap:wrap; align-items:center; gap:0.6rem 0.8rem; }
+.hero-tools-label{ font-family:var(--font-mono); font-size:var(--fs-1); color:var(--ink-dim); text-transform:uppercase; letter-spacing:0.06em; }
+.hero-tools .btn{ font-size:var(--fs-1); padding:0.55em 1em; }
 
 .journey{ display:flex; margin-top:2.5rem; max-width:34em; }
 .journey-node{ flex:1; position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; }
@@ -792,6 +795,7 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
       <a href="#outcomes">Outcomes</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
+      <a href="https://kit.learnwithsarvesh.com/" target="_blank" rel="noopener">Free tools</a>
     </nav>
     <div class="nav-right">
       <a class="btn btn-amber" href="#enroll" style="padding:0.6em 1.1em;">Enroll now</a>
@@ -829,6 +833,11 @@ footer.site-footer{ border-top:1px solid var(--line); padding-block:var(--space-
     <div class="hero-ctas">
       <a class="btn btn-amber" href="#enroll">Enroll now</a>
       <a class="btn btn-ghost" href="#curriculum">See the 6 projects</a>
+    </div>
+    <div class="hero-tools">
+      <span class="hero-tools-label">Free tools:</span>
+      <a class="btn btn-ghost" href="https://kit.learnwithsarvesh.com/skill-gap-audit.html" target="_blank" rel="noopener">Skill Gap Audit →</a>
+      <a class="btn btn-ghost" href="https://kit.learnwithsarvesh.com/calculator.html" target="_blank" rel="noopener">LLM Cost Calculator →</a>
     </div>
     <div class="hero-video">
       <p class="hero-video-label">▶ Start here — the AI roadmap, explained by Sarvesh</p>
@@ -1652,6 +1661,9 @@ document.addEventListener('click', function (e) {
   else if (href.indexOf('pages.razorpay.com/ai-ready') !== -1) name = 'pay_india_click';
   else if (href.indexOf('wa.me/') !== -1 || href.indexOf('chat.whatsapp.com') !== -1) name = 'whatsapp_click';
   else if (href.indexOf('webinar-org') !== -1) name = 'webinar_click';
+  else if (href.indexOf('kit.learnwithsarvesh.com/skill-gap-audit') !== -1) name = 'audit_click';
+  else if (href.indexOf('kit.learnwithsarvesh.com/calculator') !== -1) name = 'calculator_click';
+  else if (href.indexOf('kit.learnwithsarvesh.com') !== -1) name = 'free_tools_click';
   else if (href === '#enroll') name = 'enroll_cta_click';
   else if (href.indexOf('mailto:') === 0) name = 'email_click';
   if (name) gtag('event', name, { link_url: href, link_text: (a.textContent || '').trim().slice(0, 80) });
